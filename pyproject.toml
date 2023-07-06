@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "reservation-system"
+version = "0.1.0"
+description = ""
+authors = ["Kamran Abdi"]
+readme = "README.md"
+packages = [{include = "reservation_system"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^4.2.3"
+django-ninja = "^0.22.2"
+dj-database-url = "^2.0.0"
+pydantic = {version = "<=2.0.0", extras = ["dotenv"]}
+psycopg2 = "^2.9.6"
+django-ninja-extra = "^0.19.1"
+pytest-django = "^4.5.2"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+black = "^23.3.0"
+pytest-cov = "^4.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
