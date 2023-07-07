@@ -14,6 +14,6 @@ class TestListingModel:
 
     def test_listing_model(self):
         listing = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         )
         assert listing != None

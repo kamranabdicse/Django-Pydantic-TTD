@@ -2,8 +2,6 @@ import json
 import pytest
 import logging
 from ninja import testing
-from django.http import Http404
-from reservation_system.exceptions.exceptions import ListingObjectDoesNotExist
 from reservation_system.models import Listing
 from reservation_system.api.api_v1.controllers.listing import router
 
@@ -21,7 +19,6 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         payload = {
-            "owner": "string",
             "name": "Test Listing",
             "address": "Test Address",
             "description": "Test Description",
@@ -55,7 +52,7 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         listing_id = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         ).id
 
         response = client.get(f"/{listing_id}")
@@ -63,7 +60,6 @@ class TestListingEndpoints:
         assert response.status_code == 200
         assert response.json() == {
             "id": listing_id,
-            "owner": "test",
             "name": "test",
             "address": "test2",
             "description": "test",
@@ -74,7 +70,6 @@ class TestListingEndpoints:
 
         listing_id = 102
         payload = {
-            "owner": "string",
             "name": "Test Listing",
             "address": "Test Address",
             "description": "Test Description",
@@ -88,11 +83,10 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         listing_id = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         ).id
 
         payload = {
-            "owner": "string",
             "name": "Test Listing",
             "address": "Test Address",
         }
@@ -105,11 +99,10 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         listing_id = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         ).id
 
         payload = {
-            "owner": "string",
             "name": "Test Listing",
             "address": "Test Address",
             "description": "Test Description",
@@ -124,7 +117,6 @@ class TestListingEndpoints:
 
         listing_id = 102
         payload = {
-            "owner": "string",
             "name": "Test Listing",
             "address": "Test Address",
         }
@@ -137,10 +129,10 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         listing_id = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         ).id
 
-        payload = {"owner": "string", "name": 123}
+        payload = {"name": 123}
 
         response = client.patch(f"/{listing_id}", json.dumps(payload))
 
@@ -150,11 +142,10 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         listing_id = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         ).id
 
         payload = {
-            "owner": "string",
             "name": "Test Listing",
             "address": "Test Address",
             "description": "Test Description",
@@ -177,7 +168,7 @@ class TestListingEndpoints:
         client = testing.TestClient(router)
 
         listing_id = Listing.objects.create(
-            owner="test", name="test", address="test2", description="test"
+            name="test", address="test2", description="test"
         ).id
 
         response = client.delete(f"/{listing_id}")
