@@ -2,6 +2,7 @@ from ninja import Router, Query
 from ninja.pagination import paginate
 import logging
 from django.http import Http404
+from typing import List
 
 from reservation_system.schemas.owner import (
     OwnerSchema,
@@ -9,6 +10,7 @@ from reservation_system.schemas.owner import (
     PatchOwnerSchema,
 )
 from reservation_system.cruds.owner import owner_crud
+from reservation_system.cruds.reservation import reservation_crud
 from reservation_system.exceptions.exceptions import OwnerObjectDoesNotExist
 
 logger = logging.getLogger(__name__)

@@ -31,12 +31,6 @@ class BaseCRUD:
         obj.save()
         return obj
 
-    def get_multi(self, skip=0, limit=None, asc=False):
-        query = self.model.objects.all().order_by("id" if asc else "-id")[skip:]
-        if limit is not None:
-            query = query[:limit]
-        return query
-
     def get(self, pk):
         return get_object(self.model, pk=pk)
 

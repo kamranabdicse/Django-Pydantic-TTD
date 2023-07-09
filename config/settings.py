@@ -79,18 +79,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=settings.DATABASE_URI, conn_max_age=600, ssl_require=True
+        default=settings.DATABASE_URI, conn_max_age=600, ssl_require=False
     )
 }
-
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
-    #     "NAME": "reservation",
-    #     "USER": "postgres",
-    #     "PASSWORD": "qpgh567",
-    #     "HOST": "127.0.0.1",
-    #     "PORT": "5432",
-    # }
 
 
 # Password validation

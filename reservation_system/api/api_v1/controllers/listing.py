@@ -2,13 +2,16 @@ from ninja import Router, Query
 from ninja.pagination import paginate
 import logging
 from django.http import Http404
+from typing import List
 
 from reservation_system.schemas.listing import (
     ListingSchema,
     CreateListingSchema,
     PatchListingSchema,
 )
+
 from reservation_system.cruds.listing import listing_crud
+from reservation_system.cruds.reservation import reservation_crud
 from reservation_system.exceptions.exceptions import ListingObjectDoesNotExist
 
 logger = logging.getLogger(__name__)

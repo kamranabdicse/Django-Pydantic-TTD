@@ -1,4 +1,3 @@
-
 from django.utils.translation import gettext_lazy as _
 
 from ninja_extra.exceptions import APIException
@@ -18,3 +17,8 @@ class OwnerObjectDoesNotExist(APIException):
 class RoomObjectDoesNotExist(APIException):
     status_code = status.HTTP_404_NOT_FOUND
     default_detail = "Room object does not exist"
+
+
+class ReservationObjectExist(APIException):
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = "Reservation object exist in your choosing time"

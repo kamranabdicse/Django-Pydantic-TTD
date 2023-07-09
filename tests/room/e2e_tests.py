@@ -18,10 +18,6 @@ pytestmark = [
 class TestRoomEndpoints:
     def test_create_room(self, listing, owner):
         client = testing.TestClient(router)
-        # listing_id = Listing.objects.create(
-        #     name="test", address="test2", description="test"
-        # ).id
-        # owner_id = Owner.objects.create(name="test", address="test2").id
 
         payload = {
             "listing_id": listing.id,

@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:14
+    restart: always
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    ports:
+      - "5433:5432"
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - mynetwork
+    
+  backend:
+    build:
+      context: .
+      dockerfile: backend.dockerfile
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8090:8000"
+    depends_on:
+      - db
+    networks:
+      - mynetwork   
+
+volumes:
+  app-db-data:
+
+networks:
+  mynetwork:   

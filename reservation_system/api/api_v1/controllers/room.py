@@ -2,6 +2,8 @@ from ninja import Router, Query
 from ninja.pagination import paginate
 import logging
 from django.http import Http404
+from datetime import datetime
+from typing import List
 
 from reservation_system.schemas.room import (
     RoomSchema,
@@ -57,3 +59,15 @@ def delete_room(request, room_id):
     room_crud.delete(room_id)
 
     return 204, None
+
+
+@router.get("/{check_in}/{check_out}/{count}", response=List[RoomSchema], url_name="check-available-room")
+def check_available_room(request, check_in: str, check_out: str, count: int):
+    try:
+        print("------------")
+        check_in = datetime.strptime(check_in, "%Y-%m-%d %H:%M")
+        check_out = datetime.strptime(check_out, "%Y-%m-%d %H:%M")
+        rooms = room_crud.available_rooms(check_in, check_out, count)
+    except ValueError:
+        raise Http404("Invalid datetime format")
+    return rooms
